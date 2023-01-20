@@ -252,7 +252,9 @@ class Results(object):
 
         # ADW: WARNING this is very fragile.
         # Also, this is not quite right, should cut on the CMD available space
-        kwargs = dict(richness=rich,mag_bright=16., mag_faint=23.,
+        ## WRC: Now changed to take min/max mag into account for kwargs. We're still assuming that the color range is sufficiently wide
+        ## that it is not going to affect this absolute magnitude calculation.
+        kwargs = dict(richness=rich,mag_bright= self.config['mag'].get('min'), mag_faint= self.config['mag'].get('max'),
                       n_trials=5000,alpha=self.alpha, seed=0)
         martin = self.config['results'].get('martin')
         if martin:
